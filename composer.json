@@ -1,5 +1,5 @@
 {
-	"name": "haltuf/ecomail-nette",
+	"name": "lachmart/ecomail-nette",
 	"type": "library",
 	"keywords": ["ecomail","api","nette"],
 	"description": "Independent Ecomail API wrapper for Nette",
@@ -12,8 +12,10 @@
 	],
 	"require": {
 		"php": ">=5.3.1",
-		"nette/nette": "~2.3"
-	},
+		"nette/nette": "~2.3",
+      "ext-json": "*",
+      "ext-curl": "*"
+    },
 	"autoload": {
 		"classmap": ["src/"]
 	}
