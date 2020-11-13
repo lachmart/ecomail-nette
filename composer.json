@@ -12,10 +12,8 @@
 	],
 	"require": {
 		"php": ">=5.3.1",
-		"nette/nette": "~2.3",
-      "ext-curl": "*",
-      "ext-json": "*"
-    },
+		"nette/nette": "~2.3"
+	},
 	"autoload": {
 		"classmap": ["src/"]
 	}
