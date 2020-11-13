@@ -72,13 +72,8 @@ class Ecomail
 		
 		return $this->sendRequest($url);
 	}
-	
-	public function addSubscriber($list_id, $data = array(), $trigger_autoresponders = FALSE, $update_existing = TRUE, $resubscribe = FALSE) {
-		
-		$url = self::URL . 'lists/' . $list_id . '/subscribe';
-		$post = json_encode(array(
-			'subscriber_data' => array(
-				'name' => $data['name'],
+	/*
+	 *          'name' => $data['name'],
 				'surname' => $data['surname'],
 				'email' => $data['email'],
 				'vokativ' => $data['vokativ'],
@@ -92,8 +87,12 @@ class Ecomail
 				'pretitle' => $data['pretitle'],
 				'surtitle' => $data['surtitle'],
 				'birthday' => $data['birthday'],
-				'custom_fields' => (array)$data['custom_fields'],
-			),
+				'custom_fields' => (array)$data['custom_fields'],*/
+	public function addSubscriber($list_id, $data = array(), $trigger_autoresponders = FALSE, $update_existing = TRUE, $resubscribe = FALSE) {
+		
+		$url = self::URL . 'lists/' . $list_id . '/subscribe';
+		$post = json_encode(array(
+			'subscriber_data' => $data,
 			'trigger_autoresponders' => $trigger_autoresponders,
 			'update_existing' => $update_existing,
 			'resubscribe' => $resubscribe
@@ -111,26 +110,12 @@ class Ecomail
 	}
 	
 	public function updateSubscriber($list_id, $data = array()) {
-		
+		$email = $data['email'];
+		unset($data['email']);
 		$url = self::URL . 'lists/' . $list_id . '/update-subscriber';
 		$post = json_encode(array(
-			'email' => $data['email'],
-			'subscriber_data' => array(
-				'name' => $data['name'],
-				'surname' => $data['surname'],
-				'vokativ' => $data['vokativ'],
-				'vokativ_s' => $data['vokativ_s'],
-				'company' => $data['company'],
-				'city' => $data['city'],
-				'street' => $data['street'],
-				'zip' => $data['zip'],
-				'country' => $data['country'],
-				'phone' => $data['phone'],
-				'pretitle' => $data['pretitle'],
-				'surtitle' => $data['surtitle'],
-				'birthday' => $data['birthday'],
-				'custom_fields' => (array)$data['custom_fields'],
-			)
+			'email' => $email,
+			'subscriber_data' => $data,
 		));
 		
 		return $this->sendRequest($url, 'PUT', $post);
